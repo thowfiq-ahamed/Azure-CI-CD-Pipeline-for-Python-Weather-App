@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background-color: #f4f7f6; text-align: center; margin-top: 5em; }
+        h1 { color: #333; }
+        .container { background: white; padding: 2em; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
+        input[type="text"] { padding: 0.8em; width: 250px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 0.8em 1.5em; border: none; background-color: #007BFF; color: white; border-radius: 5px; cursor: pointer; }
+        .error { color: #D8000C; background-color: #FFD2D2; padding: 0.5em; border-radius: 5px; margin-top: 1em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Live Weather Dashboard</h1>
+        <p>Enter a city name to get the current weather.</p>
+        <form action="/weather" method="post">
+            <input type="text" name="city" placeholder="e.g., London, Tokyo" required>
+            <button type="submit">Get Weather</button>
+        </form>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

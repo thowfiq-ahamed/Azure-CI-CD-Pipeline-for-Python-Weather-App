@@ -1,0 +1,5 @@
+# Ignore the file containing our secret API key
+.env
+
+# Ignore the Python virtual environment folder
+env/
