@@ -1,22 +1,25 @@
 # Azure CI/CD Pipeline for a Python Weather App
 
-This project is a complete, end-to-end CI/CD pipeline built with Azure DevOps. It automatically builds and deploys a Python Flask web application that fetches live weather data from the OpenWeatherMap API.
+This project demonstrates a full CI/CD pipeline using Azure DevOps to automatically deploy a Python Flask web application to Azure App Service.
 
+**Live Demo:** [Link to your live web app on Azure will go here once it's deployed]
+
+---
+## Project Architecture
+The diagram below shows the workflow. A `git push` to this GitHub repository triggers a build pipeline in Azure DevOps, which then triggers a release pipeline to deploy the application to Azure App Service.
+
+
+*(You can easily create a simple diagram using a free tool like diagrams.net, save it as a PNG, and add it to your GitHub repository.)*
+
+---
 ## Key Features
-- **Automated CI Pipeline:** Builds and packages the application using YAML.
-- **Automated CD Pipeline:** Deploys the application to Azure App Service.
-- **Secure Key Management:** API keys are managed securely using Azure's configuration settings.
+- **Automated CI Pipeline:** The `azure-pipelines.yml` file defines a build that automatically tests and packages the application.
+- **Automated CD Pipeline:** A release pipeline in Azure DevOps deploys the application to a staging and production environment.
+- **Infrastructure as a Service (IaaS):** The application is hosted on **Azure App Service**, a fully managed platform.
+- **Secure Key Management:** The OpenWeatherMap API key is securely stored in Azure App Service's configuration, not in the code.
 
 ## Technologies Used
 - **Cloud:** Microsoft Azure (App Service)
 - **CI/CD:** Azure DevOps (Pipelines, Repos)
 - **Language & Framework:** Python, Flask
 - **Tools:** Git, REST APIs, YAML
-
-## How to Run Locally
-1. Clone the repository.
-2. Create a virtual environment: `python -m venv env`
-3. Activate it: `.\env\Scripts\activate`
-4. Install dependencies: `pip install -r requirements.txt`
-5. Create a `.env` file and add your `WEATHER_API_KEY`.
-6. Run the app: `flask --app pyapp run`
