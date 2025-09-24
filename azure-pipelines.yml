@@ -5,8 +5,8 @@ trigger:
 
 variables:
   # EDIT THESE TWO VALUES
-  azureServiceConnectionName: 'Azure subscription 1'
-  webAppName: '<Your Web App Name>' # Replace with your app name from the Azure portal
+  azureServiceConnectionName: 'AzureConnection'
+  webAppName: 'Weatherapp' # Replace with your app name from the Azure portal
 
   # Pipeline variables
   vmImageName: 'ubuntu-latest'
