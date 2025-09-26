@@ -5,18 +5,120 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background-color: #f4f7f6; text-align: center; margin-top: 5em; }
-        h1 { color: #333; }
-        .container { background: white; padding: 2em; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
-        input[type="text"] { padding: 0.8em; width: 250px; border: 1px solid #ccc; border-radius: 5px; }
-        button { padding: 0.8em 1.5em; border: none; background-color: #007BFF; color: white; border-radius: 5px; cursor: pointer; }
-        .error { color: #D8000C; background-color: #FFD2D2; padding: 0.5em; border-radius: 5px; margin-top: 1em; }
+        /* Import a professional font from Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* New deep space gradient background for high contrast */
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff; /* Default text color is white */
+        }
+
+        .container {
+            /* Enhanced "frosted glass" effect */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            
+            padding: 2em 3em;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            
+            /* A subtle fade-in animation */
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            color: #ffffff;
+            font-weight: 600;
+            margin-bottom: 0.5em;
+            font-size: 2.2rem;
+        }
+        
+        p {
+            color: #e0e0e0; /* A slightly dimmer white for subtext */
+            font-weight: 300;
+            margin-top: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2em;
+            margin-top: 2em;
+        }
+
+        input[type="text"] {
+            padding: 1em;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        input[type="text"]::placeholder {
+            color: #bbb;
+        }
+
+        input[type="text"]:focus {
+            border-color: #89f7fe;
+            box-shadow: 0 0 15px rgba(137, 247, 254, 0.3);
+        }
+
+        button {
+            padding: 1em 1.5em;
+            border: none;
+            /* A vibrant gradient for the button */
+            background: linear-gradient(90deg, #00C9FF 0%, #92FE9D 100%);
+            color: #1c3d5a;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            /* Smooth transition effect */
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+        
+        button:hover {
+            transform: translateY(-3px); /* Slight lift on hover */
+            box-shadow: 0 6px 20px rgba(146, 254, 157, 0.4);
+        }
+
+        .error {
+            color: #ffffff;
+            background-color: rgba(231, 76, 60, 0.4);
+            border: 1px solid rgba(231, 76, 60, 0.6);
+            padding: 0.7em;
+            border-radius: 5px;
+            margin-top: 1em;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Live Weather Dashboard</h1>
-        <p>Enter a city name to get the current weather.</p>
+        <h1>Weather Dashboard</h1>
+        <p>Enter any city to get live weather data instantly.</p>
         <form action="/weather" method="post">
             <input type="text" name="city" placeholder="e.g., London, Tokyo" required>
             <button type="submit">Get Weather</button>
@@ -27,3 +129,4 @@
     </div>
 </body>
 </html>
+
