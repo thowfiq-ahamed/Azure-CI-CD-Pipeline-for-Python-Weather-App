@@ -4,14 +4,17 @@ trigger:
 - master
 
 variables:
-  azureServiceConnectionName: 'AzureConnection' # Or your correct service connection name
-  webAppName: 'thowfiq-app-2025' # Or your correct web app name
+  # Ensure these two values are correct for your setup
+  azureServiceConnectionName: 'AzureConnection' 
+  webAppName: 'thowfiq-app-2025' 
+
+  # Pipeline variables
   vmImageName: 'ubuntu-latest'
-  pythonVersion: '3.11' # Make sure this matches your App Service
+  pythonVersion: '3.11'
 
 stages:
 - stage: Build
-  displayName: Build stage
+  displayName: 'Build stage'
   jobs:
   - job: Build
     pool:
@@ -22,11 +25,11 @@ stages:
         versionSpec: '$(pythonVersion)'
       displayName: 'Use Python $(pythonVersion)'
 
-    # UPDATED SCRIPT BLOCK
+    # This is the corrected script that packages your dependencies
     - script: |
-    python -m pip install --upgrade pip
-    pip install --target="./.python_packages/lib/site-packages" -r ./requirements.txt
-   displayName: 'Install dependencies'
+        python -m pip install --upgrade pip
+        pip install --target="./.python_packages/lib/site-packages" -r ./requirements.txt
+      displayName: 'Install dependencies'
 
     - task: ArchiveFiles@2
       inputs:
@@ -37,16 +40,20 @@ stages:
         replaceExistingArchive: true
       displayName: 'Archive files'
 
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-      artifact: drop
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+      displayName: 'Publish Artifact'
 
 - stage: Deploy
-  displayName: Deploy stage
+  displayName: 'Deploy stage'
   dependsOn: Build
   condition: succeeded()
   jobs:
   - deployment: Deploy
-    displayName: Deploy to App Service
+    displayName: 'Deploy to App Service'
     environment: 'production'
     pool:
       vmImage: $(vmImageName)
