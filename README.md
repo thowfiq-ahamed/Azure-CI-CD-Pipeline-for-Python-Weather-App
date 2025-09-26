@@ -2,7 +2,7 @@
 
 This project demonstrates a full CI/CD pipeline using Azure DevOps to automatically deploy a Python Flask web application to Azure App Service.
 
-**Live Demo:** [Link to your live web app on Azure will go here once it's deployed]
+**Live Demo:** "thowfiq-app-2025-buhtduanhje5gndy.centralindia-01.azurewebsites.net"
 
 ---
 ## Project Architecture
