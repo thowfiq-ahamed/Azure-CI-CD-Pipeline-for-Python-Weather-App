@@ -1,18 +1,19 @@
+```yaml
+# This pipeline builds and deploys the Python application to Azure App Service
+
 trigger:
 - master
 
 variables:
-  # Ensure these two values are correct for your setup
-  azureServiceConnectionName: 'AzureConnection' 
-  webAppName: 'thowfiq-app-2025' 
+  azureServiceConnectionName: 'AzureConnection'
+  webAppName: 'thowfiq-app-2025'
 
-  # Pipeline variables
   vmImageName: 'ubuntu-latest'
   pythonVersion: '3.11'
 
 stages:
 - stage: Build
-  displayName: 'Build stage'
+  displayName: Build stage
   jobs:
   - job: Build
     pool:
@@ -21,38 +22,37 @@ stages:
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '$(pythonVersion)'
-      displayName: 'Use Python $(pythonVersion)'
+      displayName: Use Python $(pythonVersion)
 
-    # Install dependencies globally (no --target)
     - script: |
         python -m pip install --upgrade pip
-        pip install -r ./requirements.txt
-      displayName: 'Install dependencies'
+        pip install -r requirements.txt
+      displayName: Install dependencies
 
     - task: ArchiveFiles@2
       inputs:
         rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
         includeRootFolder: false
-        archiveType: 'zip'
+        archiveType: zip
         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
         replaceExistingArchive: true
-      displayName: 'Archive files'
+      displayName: Archive files
 
     - task: PublishBuildArtifacts@1
       inputs:
         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
-      displayName: 'Publish Artifact'
+        ArtifactName: drop
+        publishLocation: Container
+      displayName: Publish Artifact
 
 - stage: Deploy
-  displayName: 'Deploy stage'
+  displayName: Deploy stage
   dependsOn: Build
   condition: succeeded()
   jobs:
   - deployment: Deploy
-    displayName: 'Deploy to App Service'
-    environment: 'production'
+    displayName: Deploy to App Service
+    environment: production
     pool:
       vmImage: $(vmImageName)
     strategy:
@@ -60,10 +60,10 @@ stages:
         deploy:
           steps:
           - task: AzureWebApp@1
-            displayName: 'Deploy Azure Web App'
+            displayName: Deploy Azure Web App
             inputs:
               azureSubscription: $(azureServiceConnectionName)
-              appType: 'webAppLinux'
+              appType: webAppLinux
               appName: $(webAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
               startupCommand: 'gunicorn --bind=0.0.0.0 --timeout 600 pyapp:app'
