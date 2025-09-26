@@ -1,2 +1,6 @@
+<<<<<<< HEAD
 [config]
+=======
+[config]
+>>>>>>> 2d12c38aec7267f79a90637de98d44d488884bb2
 SCM_DO_BUILD_DURING_DEPLOYMENT = true
