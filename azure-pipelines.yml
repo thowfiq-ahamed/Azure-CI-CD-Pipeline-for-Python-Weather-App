@@ -1,14 +1,11 @@
-# This single pipeline builds and deploys the Python application to Azure App Service.
+# Final pipeline for building and deploying the Python application.
 
 trigger:
 - master
 
 variables:
-  # Ensure these two values are correct for your setup
   azureServiceConnectionName: 'AzureConnection' 
   webAppName: 'thowfiq-app-2025' 
-
-  # Pipeline variables
   vmImageName: 'ubuntu-latest'
   pythonVersion: '3.11'
 
@@ -25,12 +22,10 @@ stages:
         versionSpec: '$(pythonVersion)'
       displayName: 'Use Python $(pythonVersion)'
 
-    # THIS IS THE KEY CHANGE
-    # This installs the packages into a folder that will be deployed with the app
     - script: |
         python -m pip install --upgrade pip
         pip install --target="./.python_packages/lib/site-packages" -r ./requirements.txt
-      displayName: 'Install dependencies'
+      displayName: 'Install dependencies into package'
 
     - task: ArchiveFiles@2
       inputs:
@@ -41,8 +36,12 @@ stages:
         replaceExistingArchive: true
       displayName: 'Archive files'
 
-    - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
-      artifact: drop
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+      displayName: 'Publish Artifact'
 
 - stage: Deploy
   displayName: 'Deploy stage'
