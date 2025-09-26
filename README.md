@@ -2,15 +2,13 @@
 
 This project demonstrates a complete, end-to-end CI/CD pipeline built with Azure DevOps. It automatically builds and deploys a Python Flask web application that fetches live weather data from the OpenWeatherMap API.
 
-**Live Demo:** [https://thowfiq-app-2025.azurewebsites.net/](https://thowfiq-app-2025.azurewebsites.net/) 
-*(Replace this with your actual live URL)*
+**Live Demo:** [https://thowfiq-app-2025-buhtduanhje5gndy.centralindia-01.azurewebsites.net/](https://thowfiq-app-2025-buhtduanhje5gndy.centralindia-01.azurewebsites.net/) 
 
 ---
 ## Project Architecture
 This project uses a "pipeline-as-code" approach with a multi-stage YAML file to define both the build (CI) and deployment (CD) processes. A `git push` to the main branch automatically triggers the entire workflow, deploying the application to Azure App Service.
 
 
-*(**Pro-Tip:** Create a simple diagram using a free tool like diagrams.net, save it as an image in your repository, and link it here.)*
 
 ---
 ## Key Features
