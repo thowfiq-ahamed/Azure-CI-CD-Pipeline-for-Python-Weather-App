@@ -6,11 +6,11 @@ trigger:
 variables:
   # EDIT THESE TWO VALUES
   azureServiceConnectionName: 'AzureConnection'
-  webAppName: 'Weatherapp' # Replace with your app name from the Azure portal
+  webAppName: 'thowfiq-app-2025' # Replace with your app name from the Azure portal
 
   # Pipeline variables
   vmImageName: 'ubuntu-latest'
-  pythonVersion: '3.9'
+  pythonVersion: '3.11'
 
 stages:
 - stage: Build
