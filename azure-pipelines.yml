@@ -1,4 +1,4 @@
-```yaml
+
 # This pipeline builds and deploys the Python application to Azure App Service
 
 trigger:
@@ -67,4 +67,4 @@ stages:
               appName: $(webAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
               startupCommand: 'gunicorn --bind=0.0.0.0 --timeout 600 pyapp:app'
-```
+
