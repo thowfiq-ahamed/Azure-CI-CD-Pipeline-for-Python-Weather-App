@@ -1,5 +1,3 @@
-# This single pipeline builds and deploys the Python application to Azure App Service.
-
 trigger:
 - master
 
@@ -25,10 +23,10 @@ stages:
         versionSpec: '$(pythonVersion)'
       displayName: 'Use Python $(pythonVersion)'
 
-    # This is the corrected script that packages your dependencies
+    # Install dependencies globally (no --target)
     - script: |
         python -m pip install --upgrade pip
-        pip install --target="./.python_packages/lib/site-packages" -r ./requirements.txt
+        pip install -r ./requirements.txt
       displayName: 'Install dependencies'
 
     - task: ArchiveFiles@2
@@ -69,3 +67,4 @@ stages:
               appName: $(webAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
               startupCommand: 'gunicorn --bind=0.0.0.0 --timeout 600 pyapp:app'
+```
