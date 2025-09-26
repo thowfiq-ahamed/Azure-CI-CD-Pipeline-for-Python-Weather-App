@@ -24,9 +24,9 @@ stages:
 
     # UPDATED SCRIPT BLOCK
     - script: |
-        pip install --upgrade pip
-        pip install --target="./.python_packages/lib/site-packages" -r ./requirements.txt
-      displayName: 'Install dependencies'
+    python -m pip install --upgrade pip
+    pip install --target="./.python_packages/lib/site-packages" -r ./requirements.txt
+   displayName: 'Install dependencies'
 
     - task: ArchiveFiles@2
       inputs:
